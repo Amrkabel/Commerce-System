@@ -46,9 +46,9 @@ public:
 		return Size;
 	}
 
-	void insertFront(int data)
+	void insertFront(T data)
 	{
-		node* newNode<T> = getnode(data);
+		node<T>* newNode = node.getnode(data);
 
 		if (newNode == NULL)
 		{
@@ -64,9 +64,9 @@ public:
 		Size++;
 	}
 
-	void insertRear(int data)
+	void insertRear(T data)
 	{
-		node* newNode = getnode(data);
+		node<T>* newNode = node.getnode(data);
 
 		if (newNode == NULL)
 		{
@@ -91,7 +91,7 @@ public:
 
 		else
 		{
-			node* temp = front;
+			node<T>* temp = front;
 			front = front->next;
 			if (front == NULL)
 			{
@@ -117,7 +117,7 @@ public:
 
 		else
 		{
-			node* temp = rear;
+			node<T>* temp = rear;
 			rear = rear->prev;
 
 			if (rear == NULL)
@@ -134,21 +134,21 @@ public:
 		}
 	}
 
-	int getFront()
+	T getFront()
 	{
 		if (isEmpty())
 		{
-			return -1;
+			return NULL;
 		}
 
 		return front->data;
 	}
 
-	int getRear()
+	T getRear()
 	{
 		if (isEmpty())
 		{
-			return -1;
+			return NULL;
 		}
 
 		return rear->data;
