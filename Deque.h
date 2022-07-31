@@ -48,7 +48,7 @@ public:
 
 	void insertFront(T data)
 	{
-		node<T>* newNode = node.getnode(data);
+		node<T>* newNode = node<T>::getnode(data);
 
 		if (newNode == NULL)
 		{
@@ -66,7 +66,7 @@ public:
 
 	void insertRear(T data)
 	{
-		node<T>* newNode = node.getnode(data);
+		node<T>* newNode = node<T>::getnode(data);
 
 		if (newNode == NULL)
 		{
@@ -136,9 +136,11 @@ public:
 
 	T getFront()
 	{
+		T x;
 		if (isEmpty())
 		{
-			return NULL;
+			cout << "This list list is empty\n";
+			return x;
 		}
 
 		return front->data;
@@ -146,9 +148,11 @@ public:
 
 	T getRear()
 	{
+		T x;
 		if (isEmpty())
 		{
-			return NULL;
+			cout << "This list list is empty\n";
+			return x;
 		}
 
 		return rear->data;
