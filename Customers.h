@@ -5,24 +5,24 @@
 
 struct customer
 {
-	int id;
-	string name;
-	string email;
-	string phone;
+	int id = 0;
+	string name = "Name";
+	string email = "Email";
+	string phone = "Phone";
 };
 
 deque<customer>* newcustomer(deque<customer>* list, string name, string email, string phone)
 {
-	customer x;
+	customer* x = new customer;
 
 	if (list->isEmpty())
 	{
-		x.id = 1;
-		x.name = name;
-		x.email = email;
-		x.phone = phone;
+		x->id = 1;
+		x->name = name;
+		x->email = email;
+		x->phone = phone;
 
-		list->insertFront(x);
+		list->insertFront(*x);
 		return NULL;
 	}
 
@@ -31,12 +31,12 @@ deque<customer>* newcustomer(deque<customer>* list, string name, string email, s
 		//Definitions
 		customer prev = list->getFront();
 
-		x.id = prev.id + 1;
-		x.name = name;
-		x.email = email;
-		x.phone = phone;
+		x->id = prev.id + 1;
+		x->name = name;
+		x->email = email;
+		x->phone = phone;
 
-		list->insertFront(x);
+		list->insertFront(*x);
 		return list;
 	}
 }
@@ -51,6 +51,19 @@ void removeoldest(deque<customer>* list)
 	else
 	{
 		list->deleteRear();
+	}
+}
+
+void removenewest(deque<customer>* list)
+{
+	if (list->isEmpty())
+	{
+		cout << "There are no customers!\n";
+	}
+
+	else
+	{
+		list->deleteFront();
 	}
 }
 

@@ -10,7 +10,7 @@ struct node
 
 	static node* getnode(T newdata)
 	{
-		node* newnode = (node*)malloc(sizeof(node));
+		node* newnode = new node;
 		newnode->data = newdata;
 		newnode->prev = NULL;
 		newnode->next = NULL;
@@ -28,7 +28,7 @@ private:
 	int Size;
 
 public:
-	void DeQue()
+	deque()
 	{
 		front = rear = NULL;
 		Size = 0;
@@ -51,17 +51,24 @@ public:
 		node<T>* newNode = node<T>::getnode(data);
 
 		if (newNode == NULL)
-		{
 			cout << "OverFlow\n";
-		}
-
 		else
 		{
-			newNode->next = front;
-			front->prev = newNode;
-			front = newNode;
+			// If deque is empty
+			if (front == NULL)
+				rear = front = newNode;
+
+			// Inserts node at the front end
+			else
+			{
+				newNode->next = front;
+				front->prev = newNode;
+				front = newNode;
+			}
+
+			// Increments count of elements by 1
+			Size++;
 		}
-		Size++;
 	}
 
 	void insertRear(T data)
@@ -75,11 +82,20 @@ public:
 
 		else
 		{
-			newNode->prev = rear;
-			rear->next = newNode;
-			rear = newNode;
+			// If deque is empty
+			if (rear == NULL)
+				front = rear = newNode;
+
+			// Inserts node at the rear end
+			else
+			{
+				newNode->prev = rear;
+				rear->next = newNode;
+				rear = newNode;
+			}
+
+			Size++;
 		}
-		Size++;
 	}
 
 	void deleteFront()
@@ -156,5 +172,17 @@ public:
 		}
 
 		return rear->data;
+	}
+
+	void erase()
+	{
+		rear = NULL;
+		while (front != NULL)
+		{
+			node* temp = front;
+			front = front->next;
+			free(temp);
+		}
+		Size = 0;
 	}
 };
