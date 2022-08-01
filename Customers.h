@@ -6,12 +6,22 @@
 struct customer
 {
 	int id = 0;
-	string name = "Name";
-	string email = "Email";
-	string phone = "Phone";
+	string* name;
+	string* email;
+	string* phone;
+
+	void print()
+	{
+			cout << "---------------------------" << endl;
+			cout << id << endl;
+			cout << *name << endl;
+			cout << *email << endl;
+			cout << *phone << endl;
+			cout << "---------------------------" << endl;
+	}
 };
 
-deque<customer>* newcustomer(deque<customer>* list, string name, string email, string phone)
+deque<customer>* newcustomer(deque<customer>* list, string* name, string* email, string* phone)
 {
 	customer* x = new customer;
 
@@ -69,8 +79,7 @@ void removenewest(deque<customer>* list)
 
 customer* searchid(deque<customer>* list, int id)
 {
-	StkNode<customer>* stacknode;
-	StkNode<customer>** stack = &stacknode;
+	StkNode<customer>* stack = NULL;
 	customer* answer = NULL;
 
 	if (list->isEmpty())
@@ -85,7 +94,7 @@ customer* searchid(deque<customer>* list, int id)
 		{
 			while (!(list->isEmpty()) and (list->getFront().id != id))
 			{
-				StkNode<customer>::push(stack, list->getFront());
+				StkNode<customer>::push(&stack, list->getFront());
 				list->deleteFront();
 			}
 
@@ -95,10 +104,10 @@ customer* searchid(deque<customer>* list, int id)
 				answer = &(temp);
 			}
 
-			while (!StkNode<customer>::isEmpty(stack))
+			while (!StkNode<customer>::isEmpty(&stack))
 			{
-				list->insertFront(StkNode<customer>::peek(stack));
-				StkNode<customer>::pop(stack);
+				list->insertFront(StkNode<customer>::peek(&stack));
+				StkNode<customer>::pop(&stack);
 			}
 
 			return answer;
@@ -108,7 +117,7 @@ customer* searchid(deque<customer>* list, int id)
 		{
 			while (!(list->isEmpty()) and (list->getRear().id != id))
 			{
-				StkNode<customer>::push(stack, list->getRear());
+				StkNode<customer>::push(&stack, list->getRear());
 				list->deleteFront();
 			}
 
@@ -118,10 +127,10 @@ customer* searchid(deque<customer>* list, int id)
 				answer = &(temp);
 			}
 
-			while (!StkNode<customer>::isEmpty(stack))
+			while (!StkNode<customer>::isEmpty(&stack))
 			{
-				list->insertRear(StkNode<customer>::peek(stack));
-				StkNode<customer>::pop(stack);
+				list->insertRear(StkNode<customer>::peek(&stack));
+				StkNode<customer>::pop(&stack);
 			}
 
 			return answer;
@@ -129,10 +138,9 @@ customer* searchid(deque<customer>* list, int id)
 	}
 }
 
-customer* searchname(deque<customer>* list, string name)
+customer* searchname(deque<customer>* list, string* name)
 {
-	StkNode<customer>* stacknode;
-	StkNode<customer>** stack = &stacknode;
+	StkNode<customer>* stack = NULL;
 	customer* answer = NULL;
 
 	if (list->isEmpty())
@@ -143,32 +151,31 @@ customer* searchname(deque<customer>* list, string name)
 
 	else
 	{
-		while (!(list->isEmpty()) and (list->getFront().name != name))
+		while (!(list->isEmpty()) && (list->getFront().name != name))
 		{
-			StkNode<customer>::push(stack, list->getFront());
+			StkNode<customer>::push(&stack, list->getFront());
 			list->deleteFront();
 		}
 
 		if (list->getFront().name == name)
 		{
 			customer temp = list->getFront();
-			answer = &(temp);
+			answer = &temp;
 		}
 
-		while (!StkNode<customer>::isEmpty(stack))
+		while (!StkNode<customer>::isEmpty(&stack))
 		{
-			list->insertFront(StkNode<customer>::peek(stack));
-			StkNode<customer>::pop(stack);
+			list->insertFront(StkNode<customer>::peek(&stack));
+			StkNode<customer>::pop(&stack);
 		}
 
 		return answer;
 	}
 }
 
-customer* searchemail(deque<customer>* list, string email)
+customer* searchemail(deque<customer>* list, string* email)
 {
-	StkNode<customer>* stacknode;
-	StkNode<customer>** stack = &stacknode;
+	StkNode<customer>* stack = NULL;
 	customer* answer = NULL;
 
 	if (list->isEmpty())
@@ -181,7 +188,7 @@ customer* searchemail(deque<customer>* list, string email)
 	{
 		while (!(list->isEmpty()) and (list->getFront().email != email))
 		{
-			StkNode<customer>::push(stack, list->getFront());
+			StkNode<customer>::push(&stack, list->getFront());
 			list->deleteFront();
 		}
 
@@ -191,20 +198,19 @@ customer* searchemail(deque<customer>* list, string email)
 			answer = &(temp);
 		}
 
-		while (!StkNode<customer>::isEmpty(stack))
+		while (!StkNode<customer>::isEmpty(&stack))
 		{
-			list->insertFront(StkNode<customer>::peek(stack));
-			StkNode<customer>::pop(stack);
+			list->insertFront(StkNode<customer>::peek(&stack));
+			StkNode<customer>::pop(&stack);
 		}
 
 		return answer;
 	}
 }
 
-customer* searchphone(deque<customer>* list, string phone)
+customer* searchphone(deque<customer>* list, string* phone)
 {
-	StkNode<customer>* stacknode;
-	StkNode<customer>** stack = &stacknode;
+	StkNode<customer>* stack = NULL;
 	customer* answer = NULL;
 
 	if (list->isEmpty())
@@ -217,7 +223,7 @@ customer* searchphone(deque<customer>* list, string phone)
 	{
 		while (!(list->isEmpty()) and (list->getFront().email != phone))
 		{
-			StkNode<customer>::push(stack, list->getFront());
+			StkNode<customer>::push(&stack, list->getFront());
 			list->deleteFront();
 		}
 
@@ -227,10 +233,10 @@ customer* searchphone(deque<customer>* list, string phone)
 			answer = &(temp);
 		}
 
-		while (!StkNode<customer>::isEmpty(stack))
+		while (!StkNode<customer>::isEmpty(&stack))
 		{
-			list->insertFront(StkNode<customer>::peek(stack));
-			StkNode<customer>::pop(stack);
+			list->insertFront(StkNode<customer>::peek(&stack));
+			StkNode<customer>::pop(&stack);
 		}
 
 		return answer;
@@ -242,17 +248,17 @@ void editid(customer* person, int id)
 	person->id = id;
 }
 
-void editname(customer* person, string name)
+void editname(customer* person, string* name)
 {
 	person->name = name;
 }
 
-void editemail(customer* person, string email)
+void editemail(customer* person, string* email)
 {
 	person->email = email;
 }
 
-void editphone(customer* person, string phone)
+void editphone(customer* person, string* phone)
 {
 	person->phone = phone;
 }

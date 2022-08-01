@@ -10,7 +10,7 @@ struct node
 
 	static node* getnode(T newdata)
 	{
-		node* newnode = new node;
+		node* newnode = new node<T>();
 		newnode->data = newdata;
 		newnode->prev = NULL;
 		newnode->next = NULL;
